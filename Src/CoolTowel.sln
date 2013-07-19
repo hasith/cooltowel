@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolTowel.Web", "CoolTowel.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolTowel.API", "CoolTowel.API\CoolTowel.API.csproj", "{7EA9D703-B408-47C2-A452-559B1261AC3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolTowel.Data", "CoolTowel.Data\CoolTowel.Data.csproj", "{053C06AF-B952-449B-BEF0-2B9A50900A9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolTowel.Model", "CoolTowel.Model\CoolTowel.Model.csproj", "{EA8E66C2-3483-4658-B9D0-B8FC2E8AF8C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{7EA9D703-B408-47C2-A452-559B1261AC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EA9D703-B408-47C2-A452-559B1261AC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EA9D703-B408-47C2-A452-559B1261AC3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053C06AF-B952-449B-BEF0-2B9A50900A9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053C06AF-B952-449B-BEF0-2B9A50900A9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053C06AF-B952-449B-BEF0-2B9A50900A9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053C06AF-B952-449B-BEF0-2B9A50900A9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA8E66C2-3483-4658-B9D0-B8FC2E8AF8C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA8E66C2-3483-4658-B9D0-B8FC2E8AF8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA8E66C2-3483-4658-B9D0-B8FC2E8AF8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA8E66C2-3483-4658-B9D0-B8FC2E8AF8C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
