@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace CoolTowel.Data.Core
 {
-    public interface IRepository<T> where T: class
+    public interface IRepository<T> where T: class, IIdentifier
     {
-        IQueryable<T> GetAll(string[] includes = null);
+        IQueryable<T> GetAll();
 
         T GetById(int id);
 
-        void InsertOrUpdate(T entity);
+        T InsertOrUpdate(T entity);
 
-        void Update(T entity);
+        T Update(T entity);
 
-        void Delete(T entity);
+        T Delete(T entity);
 
     }
 }

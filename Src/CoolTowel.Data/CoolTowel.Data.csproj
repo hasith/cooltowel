@@ -46,9 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DatabaseContext.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
     <Compile Include="Core\Repository.cs" />
     <Compile Include="Core\IRepository.cs" />
+    <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seed\SeedBaseData.cs" />
+    <Compile Include="Seed\DropAlways.cs" />
+    <Compile Include="Seed\DropIfChanged.cs" />
+    <Compile Include="Seed\ISeed.cs" />
+    <Compile Include="Seed\SeedSampleData.cs" />
+    <Compile Include="UowFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoolTowel.Model\CoolTowel.Model.csproj">

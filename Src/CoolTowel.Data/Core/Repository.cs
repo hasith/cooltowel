@@ -11,55 +11,56 @@ namespace CoolTowel.Data.Core
     public class Repository<T> : IRepository<T> where T : class, IIdentifier
     {
 
-        protected DbContext DbContext { get; set; }
-        internal DbSet<T> DbSet { get; set; }
+        protected DbContext Context { get; set; }
+        internal DbSet<T> EntitySet { get; set; }
 
         public Repository(DbContext context)
         {
-            DbContext = context;
-            DbSet = context.Set<T>();
+            Context = context;
+            EntitySet = context.Set<T>();
         }
 
 
-        public virtual IQueryable<T> GetAll(string[] includes = null)
+        public virtual IQueryable<T> GetAll()
         {
-            return DbSet.AsQueryable();
+            return EntitySet.AsQueryable();
         }
 
 
         public T GetById(int id)
         {
-            return DbSet.Find(id);
+            return EntitySet.Find(id);
         }
 
-        public virtual void InsertOrUpdate(T entity)
+        public virtual T InsertOrUpdate(T entity)
         {
-            DbSet.Add(entity);
-
+            T ret = null;
             if (entity.Id == 0)
             {
-                DbSet.Add(entity);
+                ret = EntitySet.Add(entity);
             }
             else
             {
-                DbSet.Attach(entity);
-                DbContext.Entry(entity).State = EntityState.Modified;
+                ret = EntitySet.Attach(entity);
+                Context.Entry(entity).State = EntityState.Modified;
             }
+            return ret;
         }
 
-        public virtual void Delete(T entityToDelete)
+        public virtual T Delete(T entityToDelete)
         {
-            if (DbContext.Entry(entityToDelete).State == EntityState.Detached)
+            if (Context.Entry(entityToDelete).State == EntityState.Detached)
             {
-                DbSet.Attach(entityToDelete);
+                EntitySet.Attach(entityToDelete);
             }
-            DbSet.Remove(entityToDelete);
+            return EntitySet.Remove(entityToDelete);
         }
 
-        public virtual void Update(T entityToUpdate)
+        public virtual T Update(T entityToUpdate)
         {
-            DbSet.Attach(entityToUpdate);
-            DbContext.Entry(entityToUpdate).State = EntityState.Modified;
+            T ret = EntitySet.Attach(entityToUpdate);
+            Context.Entry(entityToUpdate).State = EntityState.Modified;
+            return ret;
         }
     }
 
