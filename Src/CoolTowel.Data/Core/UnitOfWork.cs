@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,13 @@ namespace CoolTowel.Data.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        internal DatabaseContext Context { get; set; }
-        internal Dictionary<Type, object> Repositories { get; private set; }
+        internal DbContext Context { get; set; }
+        internal Dictionary<Type, object> RepositoryCache { get; private set; }
 
-        public UnitOfWork(string connectionStringName, IList<Type> entityTypes)
+        public UnitOfWork(DbContext dbContext)
         {
-            Context = new DatabaseContext(connectionStringName, entityTypes);
-            Repositories = new Dictionary<Type, object>();
+            RepositoryCache = new Dictionary<Type, object>();
+            Context = dbContext;
         }
 
         public void Commit()
@@ -34,7 +35,7 @@ namespace CoolTowel.Data.Core
         {
             // Look for repository in cache 
             object repoObj;
-            if (Repositories.TryGetValue(typeof(IRepository<T>), out repoObj))
+            if (RepositoryCache.TryGetValue(typeof(IRepository<T>), out repoObj))
             {
                 return (IRepository<T>)repoObj;
             }
@@ -42,7 +43,7 @@ namespace CoolTowel.Data.Core
             {
                 // Not found, add to cache, and return
                 IRepository<T> repo = new Repository<T>(Context);
-                Repositories[typeof(IRepository<T>)] = repo;
+                RepositoryCache[typeof(IRepository<T>)] = repo;
                 return repo;
             }
         }

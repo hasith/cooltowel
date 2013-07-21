@@ -161,10 +161,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Core\CrudController.cs" />
+    <Compile Include="Core\UowController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="ODataModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +220,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoolTowel.Data\CoolTowel.Data.csproj">
+      <Project>{053c06af-b952-449b-bef0-2b9a50900a9b}</Project>
+      <Name>CoolTowel.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoolTowel.Model\CoolTowel.Model.csproj">
+      <Project>{ea8e66c2-3483-4658-b9d0-b8fc2e8af8c2}</Project>
+      <Name>CoolTowel.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

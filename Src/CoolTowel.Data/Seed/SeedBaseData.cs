@@ -8,7 +8,7 @@ namespace CoolTowel.Data.Seed
 {
     class SeedBaseData : ISeed
     {
-        public void Seed(Core.DatabaseContext context)
+        public void Seed(DatabaseContext context)
         {
             // do nothing
         }

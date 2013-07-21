@@ -13,7 +13,7 @@ namespace CoolTowel.Test.Data
     public class UowFactoryTest
     {
         
-        public CoolTowel.Data.Core.IUnitOfWork Uow { get; set; }
+        private CoolTowel.Data.Core.IUnitOfWork Uow { get; set; }
 
         [TestInitialize]
         public void Initialize()

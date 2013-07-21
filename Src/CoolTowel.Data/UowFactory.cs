@@ -12,10 +12,6 @@ namespace CoolTowel.Data
 {
     public static class UowFactory
     {
-        static IList<Type> ENTITY_TYPES = new List<Type> { 
-            typeof(Product), 
-            typeof(Supplier) 
-        };
 
         static UowFactory()
         {
@@ -27,7 +23,7 @@ namespace CoolTowel.Data
 
         public static IUnitOfWork Create(string connectionStringName)
         {
-            IUnitOfWork uow = new UnitOfWork(connectionStringName, ENTITY_TYPES);
+            IUnitOfWork uow = new UnitOfWork(new DatabaseContext(connectionStringName));
             return uow;
         }
     }
