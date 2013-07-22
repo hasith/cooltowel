@@ -9,5 +9,6 @@ namespace CoolTowel.Data.Core
     public interface IIdentifier
     {
         int Id { get; set; }
+        Guid GUID { get; set; }
     }
 }

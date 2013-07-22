@@ -13,6 +13,8 @@ namespace CoolTowel.Model
     {
         [Key]
         public int Id { get; set; }
+        [Required]
+        public Guid GUID { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Category { get; set; }
