@@ -3,9 +3,10 @@
         router: router,
         activate: function () {
             return router.map([
-                { route: 'samples*details', moduleId: 'samples/index', title: 'Samples', nav: true, hash: "#samples" }
+                { route: 'overview', moduleId: 'components/overview/index', title: 'Overview', nav: true, hash: "#overview" },
+                { route: 'samples*details', moduleId: 'components/samples/index', title: 'Samples', nav: true, hash: "#samples" }
             ]).buildNavigationModel()
-              //.mapUnknownRoutes('samples/hello/index', 'not-found')
+              .mapUnknownRoutes('components/overview/index', 'not-found')
               .activate();
         }
     };
