@@ -37,7 +37,7 @@ namespace CoolTowel.API
             config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
 
             //OData endpoint
-            IEdmModel model = new ODataModelBuilder().GetEdmModel();
+            IEdmModel model = new RestApiModelBuilder().GetEdmModel();
             config.Routes.MapODataRoute("ODataRoute", "rest", model);
         }
     }

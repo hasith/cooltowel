@@ -1,6 +1,7 @@
 ﻿using CoolTowel.Data.Core;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -10,6 +11,7 @@ using System.Web.Http.OData;
 
 namespace CoolTowel.API.Core
 {
+    
     public class CrudController<T> : UowController<T> where T:class, IIdentifier
     {
         protected IRepository<T> Repository { get; set; }
@@ -24,47 +26,45 @@ namespace CoolTowel.API.Core
             return Repository.GetAll();
         }
 
+        [DebuggerHidden]
         protected override T GetEntityByKey(int key)
         {
            T entity = Repository.GetById(key);
            if (entity == null)
            {
-               throw new HttpResponseException(HttpStatusCode.NotFound);
+               throwStatusException(HttpStatusCode.NotFound);
            }
            return entity;
         }
 
+        [DebuggerHidden]
         protected override int GetKey(T entity)
         {
             if (entity == null)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throwStatusException(HttpStatusCode.BadRequest);
             }
-            else
-            {
-                return entity.Id;
-            }    
+            return entity.Id;
         }
 
+        [DebuggerHidden]
         protected override T CreateEntity(T entity)
         {
             if (entity == null)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throwStatusException(HttpStatusCode.BadRequest);
             }
-            else
-            {
-                entity = Repository.InsertOrUpdate(entity);
-                UnitOfWork.Commit();
-                return entity;
-            }
+            entity = Repository.InsertOrUpdate(entity);
+            UnitOfWork.Commit();
+            return entity;
         }
 
+        [DebuggerHidden]
         protected override T UpdateEntity(int key, T update)
         {
             if (key != update.Id)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                throwStatusException(HttpStatusCode.BadRequest);
             } 
 
             update = Repository.Update(update);
@@ -72,29 +72,36 @@ namespace CoolTowel.API.Core
             return update;
         }
 
+        [DebuggerHidden]
         protected override T PatchEntity(int key, Delta<T> patchEntity)
         {
             T entity = Repository.GetById(key);
             if (entity == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                throwStatusException(HttpStatusCode.NotFound);
             }
             patchEntity.Patch(entity);
             UnitOfWork.Commit();
             return entity;
         }
 
+        [DebuggerHidden]
         public override void Delete([FromODataUri] int key)
         {
             T entity = Repository.GetById(key);
             if (entity == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                throwStatusException(HttpStatusCode.NotFound);
             }
 
             Repository.Delete(entity);
             UnitOfWork.Commit();
         }
 
+        [DebuggerHidden]
+        private void throwStatusException(HttpStatusCode statusCode)
+        {
+            throw new HttpResponseException(statusCode);
+        }
     }
 }

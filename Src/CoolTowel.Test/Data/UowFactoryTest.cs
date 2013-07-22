@@ -12,7 +12,7 @@ using System.Diagnostics;
 namespace CoolTowel.Test.Data
 {
     [TestClass]
-    public class UowFactoryTest
+    public class UowFactoryTest : BaseDbIntegrationTest
     {
         
         private static CoolTowel.Data.Core.IUnitOfWork Uow { get; set; }
@@ -20,20 +20,9 @@ namespace CoolTowel.Test.Data
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            //set Data Directory for the connection string to use
-            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Empty));
-
-            //lets delete any existing database files
-            var databaseFile = Path.Combine((string)AppDomain.CurrentDomain.GetData("DataDirectory"), "CoolTowelDatabase.mdf");
-            var databaseLogFile = Path.Combine((string)AppDomain.CurrentDomain.GetData("DataDirectory"), "CoolTowelDatabase_log.ldf");
-            File.Delete(databaseFile);
-            File.Delete(databaseLogFile);
-
-
+            DeleteDbFile();
             //create the unit of work to be tested
             Uow = UowFactory.Create("DefaultConnection");
-
-            Trace.TraceInformation("CRUD tests initializing");
         }
 
         [ClassCleanup]
@@ -45,14 +34,14 @@ namespace CoolTowel.Test.Data
         [TestMethod]
         public void TestCrudProduct()
         {
-            Product tester = new Product() { GUID = Guid.NewGuid(), Name = "Test Product", Price = 289, Category = "Hot" };
+            Product tester = new Product() { GUID = Guid.NewGuid(), Name = "Test DB Product", Price = 289, Category = "Hot" };
             crudEntity(tester);
         }
 
         [TestMethod]
         public void TestCrudSupplier()
         {
-            Supplier tester = new Supplier() { GUID = Guid.NewGuid(), Name = "Test Supplier", Description = "Great for testing"};
+            Supplier tester = new Supplier() { GUID = Guid.NewGuid(), Name = "Test DB Supplier", Description = "Great for testing"};
             crudEntity(tester);
         }
 

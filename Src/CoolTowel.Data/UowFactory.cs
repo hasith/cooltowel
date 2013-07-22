@@ -15,7 +15,7 @@ namespace CoolTowel.Data
 
         static UowFactory()
         {
-            Database.SetInitializer(new DropIfChanged(new List<ISeed> { 
+            Database.SetInitializer(new DropAlways(new List<ISeed> { 
                 new SeedBaseData(), 
                 new SeedSampleData()
             }));
