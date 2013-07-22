@@ -13,6 +13,7 @@ namespace CoolTowel.API
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //MVC configuration useful for Help pages etc.
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

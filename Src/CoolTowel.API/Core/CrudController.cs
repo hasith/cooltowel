@@ -7,11 +7,12 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Description;
 using System.Web.Http.OData;
 
 namespace CoolTowel.API.Core
 {
-    
+    [ApiExplorerSettings(IgnoreApi = false)]
     public class CrudController<T> : UowController<T> where T:class, IIdentifier
     {
         protected IRepository<T> Repository { get; set; }

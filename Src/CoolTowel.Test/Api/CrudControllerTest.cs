@@ -18,37 +18,19 @@ namespace CoolTowel.Test.Api
     [TestClass]
     public class CrudControllerTest : BaseDbIntegrationTest
     {
-        private static HttpServer Server;
+        
         private static string UrlBase = "http://some.server/";
         private static HttpClient Client;
+        private static HttpServer Server;
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
             DeleteDbFile();
 
-            var config = new HttpConfiguration();
+            var configurator = new EndpointConfigurator();
+            var config = configurator.Configure(new HttpConfiguration());
             
-            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
-
-            config.MapHttpAttributeRoutes();
-
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
-
-            //let keep only the JSON formatter
-            config.Formatters.Clear();
-            config.Formatters.Add(new JsonMediaTypeFormatter());
-
-            config.EnableQuerySupport(new QueryableAttribute() { MaxExpansionDepth = 5 });
-
-            //OData endpoint
-            IEdmModel model = new RestApiModelBuilder().GetEdmModel();
-            config.Routes.MapODataRoute("ODataRoute", "rest", model);
-
             Server = new HttpServer(config);
             Client = new HttpClient(Server);
         }
