@@ -1,11 +1,11 @@
-﻿define(['core/dataservice', 'mapping'], function (ds, mapping) {
+﻿define(['core/dataservice', 'mapping', 'core/notifier'], function (ds, mapping, notifier) {
     
     var remove = function(id, callback) {
         ds.remove("Products", id, function (data, status, httpRequest) {
-            console.log("Product (" + id + ") is successfully deleted");
+            notifier.success("Product (" + id + ") is successfully deleted");
             callback();
         }, function (request, status, error) {
-            console.log(error.message, "Deletion Failed!");
+            notifier.error(error.message, "Deletion Failed!");
         });
 
     }
@@ -16,7 +16,7 @@
         ds.EntityManager.executeQuery(query).then(function (data) {
             callback(mapping.fromJS(data.results[0].value[0]));
         }).fail(function (error) {
-            console.log("Data Error: " + error.message);
+            notifier.error(error.message, "Data Retreival Error");
         });
     };
 
@@ -25,7 +25,7 @@
         ds.EntityManager.executeQuery(query).then(function (data) {
             callback(data.results[0].value);
         }).fail(function (error) {
-            console.log("Data Error : " + error.message);
+            notifier.error(error.message, "Data Retreival Error");
         });
     }
 
@@ -34,11 +34,11 @@
         var jsonEntity = ko.toJSON(mapping.toJS(entity));
 
         ds.insert("Products", jsonEntity, function (data, status, httpRequest) {
-            console.log("Product (" + data.Id + ") is successfully saved");
+            notifier.success("Product (" + data.Id + ") is successfully saved");
             callback(mapping.fromJS(data));
         },
         function (request, status, error) {
-            console.log(error.message, "Saving failed");
+            notifier.error(error.message, "Saving Failed");
         });
     }
 
