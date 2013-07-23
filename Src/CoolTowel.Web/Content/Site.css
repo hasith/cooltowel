@@ -10,3 +10,17 @@
     padding: 0 20px;
     background: #007acc;
 }
+
+/*override toastr styles*/
+.toast-success {
+  background-color: #9dbb9d;
+}
+.toast-error {
+  background-color: #bd362f;
+}
+.toast-info {
+  background-color: #77abba;
+}
+.toast-warning {
+  background-color: #c7aa81;
+}

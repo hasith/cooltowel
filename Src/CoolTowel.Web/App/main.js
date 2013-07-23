@@ -10,14 +10,15 @@
         'core': './core',
         'mapping': '../Scripts/knockout.mapping-latest',
         'q': '../Scripts/q',
-        'breeze': '../Scripts/breeze'
+        'breeze': '../Scripts/breeze',
+        'toastr': '../Scripts/toastr'
     }
 });
 
 define('jquery', [], function () { return jQuery; });
 define('knockout', [], function () { return ko; });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'q', 'breeze'],  function (system, app, viewLocator) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'q', 'breeze', 'toastr'], function (system, app, viewLocator) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");

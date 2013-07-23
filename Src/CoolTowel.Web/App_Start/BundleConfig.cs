@@ -14,18 +14,21 @@ namespace CoolTowel.Web
                     .Include("~/Scripts/knockout-{version}.js")
                     .Include("~/Scripts/knockout.mapping-{version}.js")
                     .Include("~/Scripts/modernizr-*")
-                    .Include("~/Scripts/bootstrap.js")
                     .Include("~/Scripts/q.js")
                     .Include("~/Scripts/breeze.js")
+                    .Include("~/Scripts/toastr.js")
+                    .Include("~/Scripts/bootstrap.js")
                 );
 
 
             bundles.Add(
                 new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
                       "~/Content/bootstrap-responsive.css",
-                      "~/Content/durandal.css"));
+                      "~/Content/durandal.css",
+                      "~/Content/toastr.css",
+                      //always keep the side css at the bottom
+                      "~/Content/site.css"));
         }
     }
 }
