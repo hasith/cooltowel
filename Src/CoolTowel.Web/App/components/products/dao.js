@@ -42,8 +42,19 @@
         });
     }
 
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+                   .toString(16)
+                   .substring(1);
+    };
+
+    function guid() {
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+               s4() + '-' + s4() + s4() + s4();
+    }
+
     var createNew = function () {
-        return mapping.fromJS({ Name: '', Price: 0, GUID: '' });
+        return mapping.fromJS({ Name: '', Price: '', GUID: guid() });
     }
 
     return {

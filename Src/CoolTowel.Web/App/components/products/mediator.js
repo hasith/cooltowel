@@ -30,7 +30,7 @@
 
     var save = function () {
         dao.save(selected(), function (data) {
-            selected(data);
+            view(data.Id());
         });
     }
 
