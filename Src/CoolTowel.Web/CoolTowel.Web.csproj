@@ -165,6 +165,8 @@
     <Content Include="App\components\samples\ko\simpleList\index.js" />
     <Content Include="App\components\samples\ko\twitterClient\index.html" />
     <Content Include="App\components\samples\ko\twitterClient\index.js" />
+    <Content Include="App\components\suppliers\index.html" />
+    <Content Include="App\components\suppliers\index.js" />
     <Content Include="App\core\dataservice.js" />
     <Content Include="App\core\notifier.js" />
     <Content Include="App\main.js" />

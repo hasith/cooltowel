@@ -22,7 +22,12 @@ namespace CoolTowel.Data.Seed
             context.Products.Add(new Product { GUID = Guid.NewGuid(), Name = "Sheet Tan", Price = 325 });
             context.SaveChanges();
 
-
+            context.Suppliers.Add(new Supplier { GUID = Guid.NewGuid(), Name = "Super Man", Description = "can do anything" });
+            context.Suppliers.Add(new Supplier { GUID = Guid.NewGuid(), Name = "Spider Man", Description = "eats only spiders" });
+            context.Suppliers.Add(new Supplier { GUID = Guid.NewGuid(), Name = "Iron Man", Description = "supply iron" });
+            context.Suppliers.Add(new Supplier { GUID = Guid.NewGuid(), Name = "Ben 10", Description = "alian troubles" });
+            context.Suppliers.Add(new Supplier { GUID = Guid.NewGuid(), Name = "Mr Been", Description = "Very reliable" });
+            context.SaveChanges();
         }
     }
 }

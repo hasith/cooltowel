@@ -1,0 +1,36 @@
+﻿<div id="overview" style="padding-left:40px;">
+    <h1>Overview</h1>
+    <div>
+        <h3>This component demonstrates use of ko observables, server calls and mappings.</h3>
+        <br />
+        <button class="btn" data-bind="click: callServer">Call Server to test API</button>
+    </div>
+    <br />
+ 
+    <div data-bind='visible: items().length > 0'>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind='foreach: items'>
+                <tr>
+                    <td><span data-bind='text: GUID, uniqueName: true' /></td>
+                    <td><input data-bind='value: Name' /></td>
+                    <td><input data-bind='value: Description' /></td>
+                    <td><a href='#' data-bind='click: $root.selected'>Select</a></td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+    <br />
+    <div data-bind="with: selected">
+        <h3>Selected element (try changing)</h3>
+        <input style="width: 800px" data-bind="value: Name, valueUpdate: 'afterkeydown'" />
+    </div>
+</div>
