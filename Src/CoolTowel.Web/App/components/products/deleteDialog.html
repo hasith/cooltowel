@@ -1,0 +1,34 @@
+﻿<div class="messageBox autoclose span7">
+
+    <div class="modal-header">
+        <h3>Are you sure you want to delete the following:</h3>
+    </div>
+        
+    <div class="modal-body">
+        <div data-bind="with: mediator.selected">
+
+            <div>
+                <label>
+                    <span class="span2">Identifier:</span>
+                    <label  class="span4" data-bind="text: GUID"   />
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <span class="span2">Name:</span>
+                    <label class="span4" data-bind="text: Name"  />
+                </label>
+            </div>
+
+        </div>
+    </div>
+        
+    <!-- Modal Footer -->
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-bind="enable: mediator.selected, click: remove">DELETE</button>
+        <button class="btn" data-bind="click: cancel">Cancel</button>
+    </div>
+
+
+</div>

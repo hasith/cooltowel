@@ -1,0 +1,20 @@
+﻿<table style="display: none" data-bind="visible: items().length > 0" class="table table-bordered scrollableTable">
+    <thead>
+        <tr>
+            <th>Identifier</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach: items">
+        <tr>
+            <td data-bind="text: GUID"></td>
+            <td data-bind="text: Name"></td>
+            <td data-bind="text: Price"></td>
+            <td><a href="#" data-bind="click: $root.view">View</a></td>
+            <td><a href="#" data-bind="click: $root.edit">Edit</a></td>
+        </tr>
+    </tbody>
+</table>

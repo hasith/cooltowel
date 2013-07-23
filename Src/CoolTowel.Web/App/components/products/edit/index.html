@@ -1,0 +1,31 @@
+﻿<style type="text/css">
+    input.kotxt {
+        border-width: 0px;
+        border-bottom-width: 1px;
+        border-bottom-color: gray;
+        background-color: transparent;
+    }
+
+    td.kolabel {
+        text-align: right;
+        padding-right: 0.5em;
+    }
+</style>
+
+<div data-bind="with: mediator.selected">
+    <h3>Edit Product</h3>
+    <table class="table table-bordered">
+        <tr>
+            <td class="kolabel">Name:</td>
+            <td><input class="kotxt" data-bind="value: Name" /></td>
+        </tr>
+        <tr>
+            <td class="kolabel">Price:</td>
+            <td><input class="kotxt" data-bind="value: Price" style="width: 50px;" /></td>
+        </tr>
+        <tr>
+            <td class="kolabel">Identifier:</td>
+            <td><input class="kotxt" data-bind="value: GUID" style="width: 300px;" /></td>
+        </tr>
+    </table>
+</div> 

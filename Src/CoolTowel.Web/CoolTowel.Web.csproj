@@ -114,8 +114,20 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\components\products\dao.js" />
+    <Content Include="App\components\products\deleteDialog.html" />
+    <Content Include="App\components\products\deleteDialog.js" />
+    <Content Include="App\components\products\mediator.js" />
+    <Content Include="App\components\products\edit\index.html" />
+    <Content Include="App\components\products\edit\index.js" />
+    <Content Include="App\components\products\index.html" />
+    <Content Include="App\components\products\index.js" />
     <Content Include="App\components\overview\index.html" />
     <Content Include="App\components\overview\index.js" />
+    <Content Include="App\components\products\list\index.html" />
+    <Content Include="App\components\products\list\index.js" />
+    <Content Include="App\components\products\view\index.html" />
+    <Content Include="App\components\products\view\index.js" />
     <Content Include="App\components\samples\eventAggregator\index.html" />
     <Content Include="App\components\samples\eventAggregator\index.js" />
     <Content Include="App\components\samples\eventAggregator\publisher.html" />
@@ -153,6 +165,8 @@
     <Content Include="App\components\samples\ko\simpleList\index.js" />
     <Content Include="App\components\samples\ko\twitterClient\index.html" />
     <Content Include="App\components\samples\ko\twitterClient\index.js" />
+    <Content Include="App\core\dataservice.js" />
+    <Content Include="App\core\notifier.js" />
     <Content Include="App\main.js" />
     <Content Include="App\components\samples\masterDetail\index.html" />
     <Content Include="App\components\samples\masterDetail\index.js" />
@@ -190,6 +204,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App\widgets\Readme.md" />
     <None Include="Scripts\jquery-2.0.3.intellisense.js" />
+    <Content Include="Scripts\breeze.js" />
     <Content Include="Scripts\durandal\activator.js" />
     <Content Include="Scripts\durandal\app.js" />
     <Content Include="Scripts\durandal\composition.js" />
@@ -213,6 +228,7 @@
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\q.js" />
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />

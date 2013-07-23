@@ -1,16 +1,23 @@
 ﻿requirejs.config({
     paths: {
+        //durandal definitions
         'text': '../Scripts/text',
         'durandal': '../Scripts/durandal',
         'plugins': '../Scripts/durandal/plugins',
-        'transitions': '../Scripts/durandal/transitions'
+        'transitions': '../Scripts/durandal/transitions',
+
+        //cool towel definitions
+        'core': './core',
+        'mapping': '../Scripts/knockout.mapping-latest',
+        'q': '../Scripts/q',
+        'breeze': '../Scripts/breeze'
     }
 });
 
 define('jquery', [], function () { return jQuery; });
 define('knockout', [], function () { return ko; });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator'],  function (system, app, viewLocator) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'q', 'breeze'],  function (system, app, viewLocator) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");

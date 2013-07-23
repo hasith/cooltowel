@@ -12,8 +12,11 @@ namespace CoolTowel.Web
                 new ScriptBundle("~/bundles/jslibs")
                     .Include("~/Scripts/jquery-{version}.js")
                     .Include("~/Scripts/knockout-{version}.js")
+                    .Include("~/Scripts/knockout.mapping-{version}.js")
                     .Include("~/Scripts/modernizr-*")
                     .Include("~/Scripts/bootstrap.js")
+                    .Include("~/Scripts/q.js")
+                    .Include("~/Scripts/breeze.js")
                 );
 
 
