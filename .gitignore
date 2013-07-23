@@ -22,6 +22,8 @@
 *.lib
 *.sbr
 *.sdf
+*.mdf
+*.ldf
 *.opensdf
 *.unsuccessfulbuild
 ipch/
