@@ -235,6 +235,10 @@
       <Project>{053c06af-b952-449b-bef0-2b9a50900a9b}</Project>
       <Name>CoolTowel.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CoolTowel.Logic\CoolTowel.Logic.csproj">
+      <Project>{37aca8c6-a6c2-4a0d-bc8f-5549d92a21d3}</Project>
+      <Name>CoolTowel.Logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CoolTowel.Model\CoolTowel.Model.csproj">
       <Project>{ea8e66c2-3483-4658-b9d0-b8fc2e8af8c2}</Project>
       <Name>CoolTowel.Model</Name>

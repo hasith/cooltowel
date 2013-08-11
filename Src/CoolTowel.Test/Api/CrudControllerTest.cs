@@ -74,7 +74,7 @@ namespace CoolTowel.Test.Api
 
             //retreve GET all
             IQueryable<T> all = retrieveAll<T>(resourceName);
-            Assert.AreEqual(1, all.Count());
+            Assert.IsTrue(all.Count() > 0);
 
             //update POST
             Guid newGuid = Guid.NewGuid();

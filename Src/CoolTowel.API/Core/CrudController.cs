@@ -1,4 +1,5 @@
 ﻿using CoolTowel.Data.Core;
+using CoolTowel.Logic.Core.Generic;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,85 +25,74 @@ namespace CoolTowel.API.Core
 
         public override IQueryable<T> Get()
         {
-            return Repository.GetAll();
+            return new RetrieveAll<T>(UnitOfWork).Execute();
         }
 
-        [DebuggerHidden]
         protected override T GetEntityByKey(int key)
         {
-           T entity = Repository.GetById(key);
+            T entity = new RetrieveById<T>(UnitOfWork).Execute(key);
            if (entity == null)
            {
-               throwStatusException(HttpStatusCode.NotFound);
+               throw new HttpResponseException(HttpStatusCode.NotFound);
            }
            return entity;
         }
 
-        [DebuggerHidden]
         protected override int GetKey(T entity)
         {
             if (entity == null)
             {
-                throwStatusException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
             return entity.Id;
         }
 
-        [DebuggerHidden]
         protected override T CreateEntity(T entity)
         {
             if (entity == null)
             {
-                throwStatusException(HttpStatusCode.BadRequest);
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
-            entity = Repository.InsertOrUpdate(entity);
+            entity = new CreateOrUpdate<T>(UnitOfWork).Execute(entity);
             UnitOfWork.Commit();
             return entity;
         }
 
-        [DebuggerHidden]
         protected override T UpdateEntity(int key, T update)
         {
             if (key != update.Id)
             {
-                throwStatusException(HttpStatusCode.BadRequest);
-            } 
+                throw new HttpResponseException(HttpStatusCode.BadRequest);
+            }
 
-            update = Repository.Update(update);
+            update = new CreateOrUpdate<T>(UnitOfWork).Execute(update);
             UnitOfWork.Commit();
             return update;
         }
 
-        [DebuggerHidden]
         protected override T PatchEntity(int key, Delta<T> patchEntity)
         {
-            T entity = Repository.GetById(key);
+            T entity = GetEntityByKey(key);
             if (entity == null)
             {
-                throwStatusException(HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
             patchEntity.Patch(entity);
             UnitOfWork.Commit();
             return entity;
         }
 
-        [DebuggerHidden]
         public override void Delete([FromODataUri] int key)
         {
-            T entity = Repository.GetById(key);
+            T entity = GetEntityByKey(key);
             if (entity == null)
             {
-                throwStatusException(HttpStatusCode.NotFound);
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
 
-            Repository.Delete(entity);
+            new Delete<T>(UnitOfWork).Execute(entity);
             UnitOfWork.Commit();
         }
 
-        [DebuggerHidden]
-        private void throwStatusException(HttpStatusCode statusCode)
-        {
-            throw new HttpResponseException(statusCode);
-        }
     }
 }
