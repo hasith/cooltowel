@@ -47,7 +47,7 @@ namespace CoolTowel.Test.Data
 
         private void crudEntity<T>(T tester) where T:class, IIdentifier
         {
-            var repository = Uow.GetRepository<T>();
+            var repository = Uow.GetEntityRepository<T>();
             //Insert
             var inserted = repository.InsertOrUpdate(tester);
             Uow.Commit();

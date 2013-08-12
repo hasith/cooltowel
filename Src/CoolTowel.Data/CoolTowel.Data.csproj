@@ -52,6 +52,7 @@
     <Compile Include="Core\IRepository.cs" />
     <Compile Include="Core\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repos\ProductRepository.cs" />
     <Compile Include="Seed\SeedBaseData.cs" />
     <Compile Include="Seed\DropAlways.cs" />
     <Compile Include="Seed\DropIfChanged.cs" />

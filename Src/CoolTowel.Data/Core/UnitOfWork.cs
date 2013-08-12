@@ -31,7 +31,7 @@ namespace CoolTowel.Data.Core
             }
         }
 
-        public IRepository<T> GetRepository<T>() where T : class, IIdentifier
+        public IRepository<T> GetEntityRepository<T>() where T : class, IIdentifier
         {
             // Look for repository in cache 
             object repoObj;
@@ -48,6 +48,28 @@ namespace CoolTowel.Data.Core
             }
         }
 
-        
+        public R GetCustomRepository<R>() where R : class
+        {
+            object repoObj;
+            if (RepositoryCache.TryGetValue(typeof(R), out repoObj))
+            {
+                return (R)repoObj;
+            }
+            else
+            {
+                throw new NotImplementedException("There is no repository registered for the type " + typeof(R) + " in the UnitOfWork");
+            }
+            
+        }
+
+        public void RegisterEntityRepository<E>(IRepository<E> repo) where E : class, IIdentifier
+        {
+            RepositoryCache[typeof(IRepository<E>)] = repo;
+        }
+
+        public void RegisterCustomRepository<R>(R repo) where R : class
+        {
+            RepositoryCache.Add(typeof(R), repo);
+        }
     }
 }

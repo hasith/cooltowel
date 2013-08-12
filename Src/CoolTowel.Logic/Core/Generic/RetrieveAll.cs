@@ -13,7 +13,7 @@ namespace CoolTowel.Logic.Core.Generic
 
         public override IQueryable<Entity> Execute(object request = null)
         {
-            return UnitOfWork.GetRepository<Entity>().GetAll();
+            return UnitOfWork.GetEntityRepository<Entity>().GetAll();
         }
     }
 }

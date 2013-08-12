@@ -1,4 +1,5 @@
 ﻿using CoolTowel.Data.Core;
+using CoolTowel.Data.Repos;
 using CoolTowel.Data.Seed;
 using CoolTowel.Model;
 using System;
@@ -15,7 +16,7 @@ namespace CoolTowel.Data
 
         static UowFactory()
         {
-            Database.SetInitializer(new DropAlways(new List<ISeed> { 
+            Database.SetInitializer(new DropIfChanged(new List<ISeed> { 
                 new SeedBaseData(), 
                 new SeedSampleData()
             }));
@@ -23,7 +24,11 @@ namespace CoolTowel.Data
 
         public static IUnitOfWork Create(string connectionStringName)
         {
-            IUnitOfWork uow = new UnitOfWork(new DatabaseContext(connectionStringName));
+            var context = new DatabaseContext(connectionStringName);
+            var uow = new UnitOfWork(context);
+            //register any extended entity repository or custom repositories
+            uow.RegisterEntityRepository<Product>(new ProductRepository(context));
+
             return uow;
         }
     }

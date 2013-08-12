@@ -13,7 +13,7 @@ namespace CoolTowel.Logic.Core.Generic
 
         public override Entity Execute(Entity entity)
         {
-            return UnitOfWork.GetRepository<Entity>().InsertOrUpdate(entity);
+            return UnitOfWork.GetEntityRepository<Entity>().InsertOrUpdate(entity);
         }
     }
 }

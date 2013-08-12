@@ -10,6 +10,9 @@ namespace CoolTowel.Data.Core
     {
         void Commit();
 
-        IRepository<T> GetRepository<T>() where T : class, IIdentifier;
+        IRepository<T> GetEntityRepository<T>() where T : class, IIdentifier;
+        R GetCustomRepository<R>() where R : class;
+        void RegisterEntityRepository<E>(IRepository<E> repository) where E : class, IIdentifier;
+        void RegisterCustomRepository<R>(R repository) where R : class;
     }
 }

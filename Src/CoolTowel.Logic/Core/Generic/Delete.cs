@@ -13,7 +13,7 @@ namespace CoolTowel.Logic.Core.Generic
 
         public override Entity Execute(Entity entity)
         {
-            return UnitOfWork.GetRepository<Entity>().Delete(entity);
+            return UnitOfWork.GetEntityRepository<Entity>().Delete(entity);
         }
     }
 }

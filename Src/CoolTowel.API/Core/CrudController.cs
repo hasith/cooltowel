@@ -20,7 +20,7 @@ namespace CoolTowel.API.Core
 
         public CrudController()
         {
-            Repository = UnitOfWork.GetRepository<T>();
+            Repository = UnitOfWork.GetEntityRepository<T>();
         }
 
         public override IQueryable<T> Get()
