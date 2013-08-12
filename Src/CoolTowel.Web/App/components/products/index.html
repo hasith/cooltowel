@@ -3,11 +3,14 @@
         <div class="span12">
             <div class="navbar">
                 <div class="navbar-inner">
-                    <ul class="nav nav-pills pull-left">
-                        <li><a href="#products/list">List All</a></li>
-                        <li><a href="#products/edit/new">Create New</a></li>
+                    <form class="navbar-form pull-left">
+
+                    <ul class="nav nav-pills">
+                        <li><a class="navbar-link" href="#products/list">List All</a></li>
+                        <li><a class="navbar-link" href="#products/edit/new">Create New</a></li>
                     </ul>
-                    <div class="pull-right">
+                    </form>
+                    <form class="navbar-form pull-right">
                         <input type="text" class="search-query navbar-search" style="margin-right: 20px" placeholder="Search">
 
                         <div class="btn-group">
@@ -15,7 +18,7 @@
                             <button class="btn" data-bind="click: remove, enable: mediator.toolbar.indexOf('delete') >= 0"><i class="icon-trash"></i><span> Delete</span></button>
                             <button class="btn" data-bind="click: edit, enable: mediator.toolbar.indexOf('edit') >= 0"><i class="icon-edit"></i><span> Edit</span></button>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

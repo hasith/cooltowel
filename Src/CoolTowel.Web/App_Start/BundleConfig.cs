@@ -23,8 +23,8 @@ namespace CoolTowel.Web
 
             bundles.Add(
                 new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/bootstrap-responsive.css",
+                      "~/Content/bootstrap/bootstrap.css",
+                      //"~/Content/bootstrap-responsive.css",
                       "~/Content/durandal.css",
                       "~/Content/toastr.css",
                       //always keep the side css at the bottom
