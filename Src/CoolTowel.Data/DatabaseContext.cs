@@ -18,6 +18,5 @@ namespace CoolTowel.Data
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<Hazard> Hazards { get; set; }
     }
 }
