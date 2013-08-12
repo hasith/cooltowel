@@ -170,7 +170,6 @@
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Core\CrudController.cs" />
     <Compile Include="Core\UowController.cs" />
     <Compile Include="EndpointConfigurator.cs" />
