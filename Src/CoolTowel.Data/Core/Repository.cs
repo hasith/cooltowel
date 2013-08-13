@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -41,8 +42,7 @@ namespace CoolTowel.Data.Core
             }
             else
             {
-                ret = EntitySet.Attach(entity);
-                Context.Entry(entity).State = EntityState.Modified;
+                return Update(entity);
             }
             return ret;
         }
@@ -58,9 +58,20 @@ namespace CoolTowel.Data.Core
 
         public virtual T Update(T entityToUpdate)
         {
-            T ret = EntitySet.Attach(entityToUpdate);
-            Context.Entry(entityToUpdate).State = EntityState.Modified;
-            return ret;
+            try
+            {
+                T ret = EntitySet.Attach(entityToUpdate);
+                Context.Entry(entityToUpdate).State = EntityState.Modified;
+                return ret;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var entry = ex.Entries.Single();
+                var clientValues = (T)entry.Entity;
+                var databaseValues = (T)entry.GetDatabaseValues().ToObject();
+
+                throw ex;
+            }
         }
     }
 

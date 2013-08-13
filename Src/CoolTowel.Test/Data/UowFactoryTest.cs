@@ -7,6 +7,7 @@ using System.Linq;
 using System.Configuration;
 using CoolTowel.Data.Core;
 using System.Diagnostics;
+using System.Data.Entity;
 
 
 namespace CoolTowel.Test.Data
@@ -15,14 +16,14 @@ namespace CoolTowel.Test.Data
     public class UowFactoryTest : BaseDbIntegrationTest
     {
         
-        private static CoolTowel.Data.Core.IUnitOfWork Uow { get; set; }
+        private static UnitOfWork Uow { get; set; }
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
             DeleteDbFile();
             //create the unit of work to be tested
-            Uow = UowFactory.Create("DefaultConnection");
+            Uow = (UnitOfWork)UowFactory.Create("DefaultConnection");
         }
 
         [ClassCleanup]
@@ -45,7 +46,7 @@ namespace CoolTowel.Test.Data
             crudEntity(tester);
         }
 
-        private void crudEntity<T>(T tester) where T:class, IIdentifier
+        private void crudEntity<T>(T tester) where T:class, IIdentifier, new()
         {
             var repository = Uow.GetEntityRepository<T>();
             //Insert
@@ -78,10 +79,13 @@ namespace CoolTowel.Test.Data
             Assert.AreEqual(newGuid, repository.GetById(inserted.Id).GUID);
 
             //Delete
+            //try detaching the object before deleting to ensure detached objects can be deleted
+            Uow.Context.ChangeObjectState(retrievedById, EntityState.Detached);
             repository.Delete(retrievedById);
             Uow.Commit();
             retrievedById = repository.GetById(inserted.Id);
             Assert.IsNull(retrievedById);
+
 
         }
 

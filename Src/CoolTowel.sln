@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.20617.1 PREVIEW
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolTowel.Web", "CoolTowel.Web\CoolTowel.Web.csproj", "{200F1FC9-844E-4CCD-983C-91F6211A2BB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoolTowel.API", "CoolTowel.API\CoolTowel.API.csproj", "{7EA9D703-B408-47C2-A452-559B1261AC3B}"
@@ -19,6 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		CodeCoverage.runsettings = CodeCoverage.runsettings
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7FA6D2F6-571E-40EB-9BB1-2CF16D8AC992}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{9C9F7203-A936-4916-BDA8-659FF271F302}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{C313D055-75C2-4637-A4E2-2A50B5077F1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,5 +57,13 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{053C06AF-B952-449B-BEF0-2B9A50900A9B} = {7FA6D2F6-571E-40EB-9BB1-2CF16D8AC992}
+		{37ACA8C6-A6C2-4A0D-BC8F-5549D92A21D3} = {7FA6D2F6-571E-40EB-9BB1-2CF16D8AC992}
+		{EA8E66C2-3483-4658-B9D0-B8FC2E8AF8C2} = {7FA6D2F6-571E-40EB-9BB1-2CF16D8AC992}
+		{7EA9D703-B408-47C2-A452-559B1261AC3B} = {9C9F7203-A936-4916-BDA8-659FF271F302}
+		{200F1FC9-844E-4CCD-983C-91F6211A2BB7} = {9C9F7203-A936-4916-BDA8-659FF271F302}
+		{684BD506-0B00-45E8-B43A-4088F29EFC47} = {C313D055-75C2-4637-A4E2-2A50B5077F1E}
 	EndGlobalSection
 EndGlobal

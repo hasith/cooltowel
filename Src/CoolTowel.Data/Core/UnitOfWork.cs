@@ -9,10 +9,10 @@ namespace CoolTowel.Data.Core
 {
     public class UnitOfWork : IUnitOfWork
     {
-        internal DbContext Context { get; set; }
+        public BaseContext Context { get; set; }
         internal Dictionary<Type, object> RepositoryCache { get; private set; }
 
-        public UnitOfWork(DbContext dbContext)
+        public UnitOfWork(BaseContext dbContext)
         {
             RepositoryCache = new Dictionary<Type, object>();
             Context = dbContext;
@@ -23,12 +23,21 @@ namespace CoolTowel.Data.Core
             Context.SaveChanges();
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (Context != null)
+                {
+                    Context.Dispose();
+                }
+            }
+        }
+
         public void Dispose()
         {
-            if (Context != null)
-            {
-                Context.Dispose();
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public IRepository<T> GetEntityRepository<T>() where T : class, IIdentifier

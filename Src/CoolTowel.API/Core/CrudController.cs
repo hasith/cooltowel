@@ -2,6 +2,7 @@
 using CoolTowel.Logic.Core.Generic;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -28,7 +29,7 @@ namespace CoolTowel.API.Core
             return new RetrieveAll<T>(UnitOfWork).Execute();
         }
 
-        protected override T GetEntityByKey(int key)
+        protected override T GetEntityByKey([FromODataUri] int key)
         {
             T entity = new RetrieveById<T>(UnitOfWork).Execute(key);
            if (entity == null)
@@ -51,23 +52,43 @@ namespace CoolTowel.API.Core
         {
             if (entity == null)
             {
-                throw new HttpResponseException(HttpStatusCode.BadRequest);
+                var message = "Entity data is not recieved in the request";
+
+                var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                {
+                    Content = new StringContent(message),
+                };
+                throw new HttpResponseException(resp);
             }
-            entity = new CreateOrUpdate<T>(UnitOfWork).Execute(entity);
-            UnitOfWork.Commit();
-            return entity;
+
+            try
+            {
+                entity = new CreateOrUpdate<T>(UnitOfWork).Execute(entity);
+                UnitOfWork.Commit();
+                return entity;
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var message = "Database concurrency error detected. Entities may have been modified or deleted since entities were loaded. Please reload the entity to obtain the new values.";
+
+                var resp = new HttpResponseMessage(HttpStatusCode.Conflict)
+                {
+                    Content = new StringContent(message),
+                    ReasonPhrase = ex.Message,
+                };
+                throw new HttpResponseException(resp);
+            }
         }
 
-        protected override T UpdateEntity(int key, T update)
+        protected override T UpdateEntity(int key, T entity)
         {
-            if (key != update.Id)
+            if (key != entity.Id)
             {
                 throw new HttpResponseException(HttpStatusCode.BadRequest);
             }
 
-            update = new CreateOrUpdate<T>(UnitOfWork).Execute(update);
-            UnitOfWork.Commit();
-            return update;
+            return CreateEntity(entity);
+
         }
 
         protected override T PatchEntity(int key, Delta<T> patchEntity)
@@ -85,13 +106,32 @@ namespace CoolTowel.API.Core
         public override void Delete([FromODataUri] int key)
         {
             T entity = GetEntityByKey(key);
+
             if (entity == null)
             {
-                throw new HttpResponseException(HttpStatusCode.NotFound);
+                var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+                {
+                    Content = new StringContent(string.Format("Entity with ID = {0} not found", key))
+                };
+                throw new HttpResponseException(resp);
             }
 
-            new Delete<T>(UnitOfWork).Execute(entity);
-            UnitOfWork.Commit();
+            try
+            {
+                new Delete<T>(UnitOfWork).Execute(entity);
+                UnitOfWork.Commit();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                var message = "Database concurrency error detected. Entities may have been modified or deleted since entities were loaded. Please reload the entity to obtain the new values.";
+   
+                var resp = new HttpResponseMessage(HttpStatusCode.Conflict)
+                {
+                    Content = new StringContent(message),
+                    ReasonPhrase = ex.Message,
+                };
+                throw new HttpResponseException(resp);
+            }
         }
 
     }

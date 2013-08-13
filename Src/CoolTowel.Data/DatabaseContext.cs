@@ -1,14 +1,16 @@
-﻿using CoolTowel.Model;
+﻿using CoolTowel.Data.Core;
+using CoolTowel.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CoolTowel.Data
 {
-    class DatabaseContext : DbContext
+    class DatabaseContext : BaseContext
     {
         public DatabaseContext(string connectionStringName) :base (connectionStringName)
         {
